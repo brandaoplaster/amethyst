@@ -7,6 +7,7 @@ import (
 	"text/template"
 	"unicode"
 
+	"github.com/brandaoplaster/amethyst/templates"
 	"github.com/spf13/cobra"
 )
 
@@ -35,18 +36,7 @@ func init() {
 
 // Função para gerar um novo arquivo de controller
 func generateController(name string, actions []string) {
-	tmpl := `package controllers
-
-import "net/http"
-
-type {{.Name}}Controller struct{}
-
-{{range .Actions}}
-func (c *{{$.Name}}Controller) {{.}}(w http.ResponseWriter, r *http.Request) {
-	// Handle {{.}}
-}
-{{end}}
-`
+	tmpl := templates.GenerationController()
 	data := struct {
 		Name    string
 		Actions []string
